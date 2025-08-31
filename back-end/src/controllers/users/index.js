@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient();
 
-const JWT_SECRET = process.env.JWT_SECRET
+
 const register = async (req, res) => {
 
   try {
@@ -45,7 +45,10 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+
   try {
+      const JWT_SECRET = process.env.JWT_SECRET
+      
     const userInfo = req.body
 
     

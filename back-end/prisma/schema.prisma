@@ -24,3 +24,46 @@ model User {
  createdAt DateTime @default(now())
 }
 
+model Patient {
+ id         String    @id @default(uuid())
+ name       String
+ email      String @unique
+ phone      String
+ dateBirth  DateTime
+appointment  Appointment[]
+createdAt    DateTime @default(now())
+updatedIn    DateTime @updatedAt
+}
+
+model Professional {
+ id          String    @id @default(uuid())
+ name        String
+ email       String @unique
+ phone       String
+specialty    String
+appointment  Appointment[]
+createdAt    DateTime @default(now())
+updatedIn    DateTime @updatedAt
+}
+
+model  Appointment {
+ id                 String    @id @default(uuid())
+ data               DateTime      
+ status             Status  @default(AGENDADA)
+  value             Float?       
+  observations      String?       
+  patientId         String
+  professionalId    String
+
+
+   patient      Patient      @relation(fields: [patientId], references: [id])
+   Professional   Professional  @relation(fields: [professionalId], references: [id])
+
+}
+
+enum Status {
+  AGENDADA
+  CONCLUIDA
+  CANCELADA
+}
+

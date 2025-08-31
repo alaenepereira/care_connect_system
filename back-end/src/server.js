@@ -9,19 +9,20 @@ app.use(cors())
 app.use(express.json());
 app.use(routes)
 
-app.use((err, _request, response, next) => {
-  if(err instanceof AppError){
-    return response.status(err.statusCode).json({ message: err.message})
+app.use((err, _req, res, next) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({ message: err.message });
   }
 
   if (!err.statusCode) {
-    return response.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: `Erro interno do servidor - ${err.message}`,
     });
   }
+
   return next();
-})
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
