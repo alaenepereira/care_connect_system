@@ -30,7 +30,7 @@ const create = async (req, res) => {
   }
 }
 
-const listAll = async(req, res) =>{
+const listAll = async(_req, res) =>{
 
   const professionalList = await prisma.professional.findMany()
   return res.status(200).json({message: 'Lista de todos os profissionais', professionalList})
@@ -60,10 +60,24 @@ const update = async(req,res) =>{
         }
        })
 
-       return res.status(200).json({message: 'Professional atualizado com sucesso', updateCredentials})
+       return res.status(200).json({message: 'Profissional atualizado com sucesso', updateCredentials})
   } catch (error) {
     console.log(error)
     throw new AppError('Profissional não encontrado', 404)
+  }
+}
+
+const Delete = async(req,res) =>{
+  const { id } = req.params
+
+  try {
+    const deleteProfessional = await prisma.professional.delete({
+      where: { id }
+    })
+
+    return res.status(200).json({message: 'Profissional deletado com sucesso', Delete})
+  } catch (error) {
+    throw new AppError(error.message, 500)
   }
 }
 
@@ -71,5 +85,6 @@ export default {
 create,
 listAll,
 listId,
-update
+update,
+Delete
 }
