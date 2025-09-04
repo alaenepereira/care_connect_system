@@ -4,9 +4,9 @@ import { ensureAuthenticated } from '../middleware/ensureAuthenticated.js'
 
 const patientRouter = express.Router()
 
-patientRouter.post('/create', ensureAuthenticated, patientController.createPatient)
-patientRouter.get('/listAll', ensureAuthenticated, patientController.listAllPatients)
-patientRouter.get('/listId/:id', ensureAuthenticated, patientController.getPatientById)
+patientRouter.post('/create', patientController.createPatient)
+patientRouter.get('/listAll', patientController.listAllPatients)
+patientRouter.get('/listId/:id', patientController.getPatientById)
 patientRouter.put('/update/:id', ensureAuthenticated, patientController.updatePatient)
 patientRouter.delete('/delete/:id', ensureAuthenticated, patientController.deletePatient)
 

@@ -2,6 +2,7 @@ import express from 'express'
 import professionalRouter from './professional.routes.js'
 import userRouter from './user.routes.js'
 import patientRouter from './patient.routes.js'
+import appointmentRouter from './appointment.routes.js'
 
 const router = express.Router()
 
@@ -9,5 +10,6 @@ const router = express.Router()
 router.use('/professional', professionalRouter)
 router.use('/user', userRouter)
 router.use('/patient', patientRouter) 
+router.use('/appointment', appointmentRouter )
 
 export default router
