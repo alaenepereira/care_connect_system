@@ -1,0 +1,181 @@
+Base URL
+http://localhost:3000
+
+👤 Rotas de Usuário
+1. Registrar Usuário
+
+POST /users/register
+
+Descrição:
+Cria um novo usuário no sistema.
+
+Parâmetros (body):
+
+{
+  "name": "Alaene Silva",
+  "email": "alaene@email.com",
+  "cpf": "12345678909",
+  "password": "123456"
+}
+
+
+Exemplo de retorno:
+
+{
+  "message": "Usuário registrado com sucesso",
+  "user": {
+    "id": 1,
+    "name": "Alaene Silva",
+    "email": "alaene@email.com"
+  }
+}
+
+2. Login do Usuário
+
+POST /users/login
+
+Descrição:
+Autentica o usuário e retorna um token JWT.
+
+Parâmetros (body):
+
+{
+  "email": "alaene@email.com",
+  "password": "123456"
+}
+
+
+Exemplo de retorno:
+
+{
+  "message": "Login realizado com sucesso",
+  "token": "$2b$10$fUzYbfzioUybxh64S3BHe.dg3/h0lLJSJ16ZfsL/qrSeNz1VY5lYC"
+}
+
+🧑‍⚕️ Rotas de Profissionais
+3. Criar Profissional
+
+POST /professionals/create
+
+Descrição:
+Cria um novo profissional de saúde.
+
+Parâmetros (body):
+
+{
+  "name": "Dra. Ana Souza",
+  "specialty": "Psicologia",
+  "email": "ana.souza@email.com",
+  "phone": "11999999999"
+}
+
+
+Exemplo de retorno:
+
+{
+  "message": "Profissional criado com sucesso",
+  "professional": {
+    "id": 1,
+    "name": "Dra. Ana Souza",
+    "specialty": "Psicologia",
+    "email": "ana.souza@email.com",
+    "phone": "11999999999"
+  }
+}
+
+4. Listar Todos os Profissionais
+
+GET /professional/listAll
+
+Descrição:
+Retorna a lista de todos os profissionais cadastrados.
+
+Exemplo de retorno:
+
+[
+  {
+    "id": 1,
+    "name": "Dra. Ana Souza",
+    "specialty": "Psicologia",
+    "email": "ana.souza@email.com",
+    "phone": "11999999999"
+  },
+  {
+    "id": 2,
+    "name": "Dr. João Lima",
+    "specialty": "Nutrição",
+    "email": "joao.lima@email.com",
+    "phone": "11988888888"
+  }
+]
+
+5. Listar Profissional por ID
+
+GET /professional/listId/:id
+
+Descrição:
+Retorna os dados de um profissional específico.
+
+Parâmetros (URL):
+
+id: ID do profissional
+
+Exemplo de retorno:
+
+{
+  "id": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+  "name": "Dra. Ana Souza",
+  "specialty": "Psicologia",
+  "phone": "11999999999"
+}
+
+6. Atualizar Profissional
+
+PUT /professional/update/:id
+🔒 Requer autenticação
+
+Descrição:
+Atualiza os dados de um profissional.
+
+Parâmetros (URL): PUT /professional/update/0fdac0a4-882a-4ab5-9146-07f5106bsde25
+
+id: ID do profissional
+
+Parâmetros (body):
+
+{
+  "name": "Dra. Ana Souza",
+  "specialty": "Psicologia Clínica",
+  "phone": "11977777777"
+}
+
+
+Exemplo de retorno:
+
+{
+  "message": "Profissional atualizado com sucesso",
+  "professional": {
+    "id": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+    "name": "Dra. Ana Souza",
+    "specialty": "Psicologia Clínica",
+    "phone": "11977777777"
+  }
+}
+
+7. Deletar Profissional
+
+DELETE /professional/delete/:id
+🔒 Requer autenticação
+
+Descrição:
+Remove um profissional pelo ID.
+
+Parâmetros (URL):
+
+id: ID do profissional
+
+Exemplo de retorno:
+
+{
+  "message": "Profissional removido com sucesso"
+}
