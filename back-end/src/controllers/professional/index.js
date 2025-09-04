@@ -62,7 +62,7 @@ const update = async(req,res) =>{
 
        return res.status(200).json({message: 'Profissional atualizado com sucesso', updateCredentials})
   } catch (error) {
-    console.log(error)
+    
     throw new AppError('Profissional não encontrado', 404)
   }
 }
@@ -75,7 +75,7 @@ const Delete = async(req,res) =>{
       where: { id }
     })
 
-    return res.status(200).json({message: 'Profissional deletado com sucesso', Delete})
+    return res.status(200).json({message: 'Profissional deletado com sucesso', deleteProfessional})
   } catch (error) {
     throw new AppError(error.message, 500)
   }
