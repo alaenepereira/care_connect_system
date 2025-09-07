@@ -14,7 +14,7 @@ const create = async(req, res) => {
       data: new Date(data),
       status,
       value,
-     observations,
+      observations,
       patientId,
       professionalId
     },
@@ -39,6 +39,7 @@ const create = async(req, res) => {
   return res.status(201).json({message: 'Agendamento criado com sucesso', newAppointment})
 
   } catch (error) {
+    console.log(error)
     throw new AppError('Erro ao criar ao agendamento', 500)
   }
 
@@ -72,7 +73,38 @@ const listAll = async(_req,res) => {
   
 }
 
+const updateAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { data, status, value, observations, patientId, professionalId } = req.body;
+
+    const updatedAppointment = await prisma.appointment.update({
+      where: {
+        id: id,
+      },
+      data: {
+        data: data ? new Date(data) : undefined,
+        status,
+        value,
+        observations,
+        patientId,
+        professionalId,
+      },
+    });
+
+    return res.status(200).json({
+      message: 'Agendamento atualizado com sucesso',
+      appointment: updatedAppointment,
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      throw new AppError('Agendamento não encontrado', 404);
+    }
+    throw new AppError('Erro interno do servidor', 500);
+  }
+};
 export default {
   create,
-  listAll
+  listAll,
+  updateAppointment
 }
