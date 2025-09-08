@@ -1,5 +1,6 @@
 import AppError from '../../errors/AppError.js'
 import { PrismaClient } from '@prisma/client'
+import professional from '../professional/index.js'
 
 const prisma = new PrismaClient()
 
@@ -72,7 +73,41 @@ const listAll = async(_req,res) => {
   
 }
 
+const listId = async(req,res)=>{
+  try{ const { id } = req.params;
+    const IdAppointment= await prisma.appointment.findUnique({
+      where:{
+        id:id,
+      },
+         include: {
+        patient: {
+          select: {
+            id: true,
+            name: true, 
+          },
+        },
+        professional: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+    });
+    if (!IdAppointment) {
+      return res.status(404).json({ message: 'Agendamento não encontrado.' });
+    }
+    return res.status(200).json(IdAppointment);
+
+  } catch (error) {
+    console.error(error);
+    throw new AppError('Erro ao buscar o agendamento', 500);
+  }
+};
+
+
 export default {
   create,
-  listAll
+  listAll,
+  listId
 }
