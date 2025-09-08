@@ -179,3 +179,193 @@ Exemplo de retorno:
 {
   "message": "Profissional removido com sucesso"
 }
+
+ 😊 Rotas de Pacientes
+8. Criar Paciente
+POST /patients/create
+
+Descrição:
+Cria um novo paciente no sistema.
+
+Parâmetros (body):
+{
+  "name": "João Oliveira",
+  "birthdate": "1990-05-15",
+  "email": "joao.oliveira@email.com",
+  "phone": "11988888888"
+}
+
+Exemplo de retorno:
+{
+  "message": "Paciente criado com sucesso",
+  "patient": {
+    "id": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+    "name": "João Oliveira",
+    "birthdate": "1990-05-15",
+    "email": "joao.oliveira@email.com",
+    "phone": "11988888888"
+  }
+}
+
+
+9. Listar Todos os Pacientes
+GET /patients/listAll
+
+Descrição:
+Retorna a lista de todos os pacientes cadastrados.
+
+Exemplo de retorno:
+[
+  {
+    "id": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+    "name": "João Oliveira",
+    "birthdate": "1990-05-15",
+    "email": "joao.oliveira@email.com",
+    "phone": "11988888888"
+  },
+  {
+    "id": "f5b8d9c0-e7f1-4e8c-8a2b-e45a2c91b0f3",
+    "name": "Maria Souza",
+    "birthdate": "1985-11-20",
+    "email": "maria.souza@email.com",
+    "phone": "11977777777"
+  }
+]
+
+10. Listar Paciente por ID
+GET /patients/listId/:id
+
+Descrição:
+Retorna os dados de um paciente específico.
+
+Parâmetros (URL):
+id: ID do paciente
+
+Exemplo de retorno:
+{
+  "id": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+  "name": "João Oliveira",
+  "birthdate": "1990-05-15",
+  "email": "joao.oliveira@email.com",
+  "phone": "11988888888"
+}
+
+11. Atualizar Paciente
+PUT /patients/update/:id
+🔒 Requer autenticação
+
+Descrição:
+Atualiza os dados de um paciente.
+
+Parâmetros (URL): PUT /patients/update/e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8
+
+id: ID do paciente
+
+
+Parâmetros (body):
+{
+  "name": "João Oliveira da Silva",
+  "phone": "11966666666"
+}
+
+Exemplo de retorno:
+{
+  "message": "Paciente atualizado com sucesso",
+  "patient": {
+    "id": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+    "name": "João Oliveira da Silva",
+    "birthdate": "1990-05-15",
+    "email": "joao.oliveira@email.com",
+    "phone": "11966666666"
+  }
+}
+
+12. Deletar Paciente
+
+DELETE /patients/delete/:id
+🔒 Requer autenticação
+
+Descrição:
+Remove um paciente pelo ID.
+
+Parâmetros (URL):
+
+id: ID do paciente
+
+Exemplo de retorno:
+
+{
+  "message": "Paciente removido com sucesso"
+}
+
+🗓️ Rotas de Agendamentos
+13. Criar Agendamento
+POST /schedule/create
+
+Descrição:
+Cria um novo agendamento de consulta.
+
+Parâmetros (body):
+{
+  "professionalId": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+  "patientId": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+  "date": "2025-09-20",
+  "time": "14:30"
+}
+
+
+Exemplo de retorno:
+
+{
+  "message": "Agendamento criado com sucesso",
+  "appointment": {
+    "id": "a9b1c2d3-e4f5-6789-abcd-ef0123456789",
+    "professionalId": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+    "patientId": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+    "date": "2025-09-20",
+    "time": "14:30"
+  }
+}
+
+14. Listar Todos os Agendamentos
+GET /schedule/listAll
+
+Descrição:
+Retorna a lista de todos os agendamentos registrados no sistema.
+
+Exemplo de retorno:
+
+[
+  {
+    "id": "a9b1c2d3-e4f5-6789-abcd-ef0123456789",
+    "professionalId": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+    "patientId": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+    "date": "2025-09-20",
+    "time": "14:30"
+  },
+  {
+    "id": "b0c1d2e3-f4a5-7890-bcde-f01234567890",
+    "professionalId": "f5b8d9c0-e7f1-4e8c-8a2b-e45a2c91b0f3",
+    "patientId": "f5b8d9c0-e7f1-4e8c-8a2b-e45a2c91b0f3",
+    "date": "2025-09-21",
+    "time": "10:00"
+  }
+]
+
+15. Listar Agendamento por ID
+GET /schedule/listId/:id
+
+Descrição:
+Retorna os dados de um agendamento específico.
+
+Parâmetros (URL):
+id: ID do agendamento
+
+Exemplo de retorno:
+{
+  "id": "a9b1c2d3-e4f5-6789-abcd-ef0123456789",
+  "professionalId": "0fdac0a4-882a-4ab5-9146-07f5106bsde25",
+  "patientId": "e45a2c91-b0f3-4e8c-8a2b-d9c0e7f1a5b8",
+  "date": "2025-09-20",
+  "time": "14:30"
+}
