@@ -12,8 +12,8 @@ Cria um novo usuário no sistema.
 Parâmetros (body):
 
 {
-  "name": "Alaene Silva",
-  "email": "alaene@email.com",
+  "name": "Erica Silva",
+  "email": "Erica@email.com",
   "cpf": "12345678909",
   "password": "123456"
 }
@@ -25,8 +25,8 @@ Exemplo de retorno:
   "message": "Usuário registrado com sucesso",
   "user": {
     "id": 1,
-    "name": "Alaene Silva",
-    "email": "alaene@email.com"
+    "name": "Erica Silva",
+    "email": "Erica@email.com"
   }
 }
 
@@ -40,7 +40,7 @@ Autentica o usuário e retorna um token JWT.
 Parâmetros (body):
 
 {
-  "email": "alaene@email.com",
+  "email": "Erica@email.com",
   "password": "123456"
 }
 

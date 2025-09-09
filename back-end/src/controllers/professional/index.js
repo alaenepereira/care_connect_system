@@ -70,8 +70,7 @@ const update = async(req,res) =>{
 
        return res.status(200).json({message: 'Profissional atualizado com sucesso', updateCredentials})
   } catch (error) {
-    
-    throw new AppError('Profissional não encontrado', 404)
+    throw new AppError('Erro interno do servidor', 500)
   }
 }
 
