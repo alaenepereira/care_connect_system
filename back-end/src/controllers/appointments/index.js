@@ -74,28 +74,29 @@ const listAll = async(_req,res) => {
 }
 
 const listId = async(req,res)=>{
-  try{ const { id } = req.params;
+  const { id } = req.params;
+
+   try{
     const IdAppointment= await prisma.appointment.findUnique({
       where:{
-        id:id,
+        id,
       },
          include: {
         patient: {
           select: {
-            id: true,
             name: true, 
           },
         },
-        professional: {
+        Professional: {
           select: {
-            id: true,
             name: true,
+            specialty: true
           },
         },
       },
     });
     if (!IdAppointment) {
-      return res.status(404).json({ message: 'Agendamento não encontrado.' });
+      return res.status(404).json( 'Agendamento não encontrado.', 404);
     }
     return res.status(200).json(IdAppointment);
 
@@ -106,8 +107,39 @@ const listId = async(req,res)=>{
 };
 
 
+const updateAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { data, status, value, observations, patientId, professionalId } = req.body;
+
+    const updatedAppointment = await prisma.appointment.update({
+      where: {
+        id: id,
+      },
+      data: {
+        data: data ? new Date(data) : undefined,
+        status,
+        value,
+        observations,
+        patientId,
+        professionalId,
+      },
+    });
+
+    return res.status(200).json({
+      message: 'Agendamento atualizado com sucesso',
+      appointment: updatedAppointment,
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      throw new AppError('Agendamento não encontrado', 404);
+    }
+    throw new AppError('Erro interno do servidor', 500);
+  }
+};
 export default {
   create,
   listAll,
+  updateAppointment,
   listId
 }

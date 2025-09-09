@@ -1,10 +1,14 @@
 import express from 'express'
 import consultation from '../controllers/appointments/index.js'
+import { ensureAuthenticated } from '../middleware/ensureAuthenticated.js'
 
 const scheduleRouter = express.Router()
 
 scheduleRouter.post('/create', consultation.create)
 scheduleRouter.get('/listAll', consultation.listAll)
-scheduleRouter.get('/listId', consultation.listId)
+scheduleRouter.get('/listId/:id', consultation.listId)
+scheduleRouter.put('/update/:id', ensureAuthenticated, consultation.updateAppointment)
+
+
 
 export default  scheduleRouter
