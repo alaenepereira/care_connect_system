@@ -53,8 +53,10 @@ const listAllPatients = async (req, res) => {
 }
 
 const getPatientById = async (req, res) => {
+
+   const { id } = req.params
   try {
-    const { id } = req.params
+   
     const patient = await prisma.patient.findUnique({
       where: { id },
      })
@@ -73,6 +75,14 @@ const updatePatient = async (req, res) => {
   try {
     const { id } = req.params
     const { name, email, phone, } = req.body
+
+     const findPatient = await prisma.patient.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findPatient)  throw new AppError('Paciente não encontrado', 404);
 
     
     const updatedPatient = await prisma.patient.update({

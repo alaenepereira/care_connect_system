@@ -50,6 +50,14 @@ const update = async(req,res) =>{
   const { id } = req.params
   const { name,specialty, phone} = req.body
 
+   const findProfessional = await prisma.professional.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findProfessional)  throw new AppError('Profissional não encontrado', 404);
+
   try {
     const updateCredentials = await prisma.professional.update({
      where: {id},
