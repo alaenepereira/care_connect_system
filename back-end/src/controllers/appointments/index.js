@@ -108,9 +108,19 @@ const listId = async(req,res)=>{
 
 
 const updateAppointment = async (req, res) => {
+
+  const { id } = req.params;
+    const { data, status, value, observations } = req.body;
   try {
-    const { id } = req.params;
-    const { data, status, value, observations, patientId, professionalId } = req.body;
+    
+
+    const findAppointment = await prisma.appointment.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (!findAppointment)  throw new AppError('Agendamento não encontrado', 404);
 
     const updatedAppointment = await prisma.appointment.update({
       where: {
@@ -120,9 +130,7 @@ const updateAppointment = async (req, res) => {
         data: data ? new Date(data) : undefined,
         status,
         value,
-        observations,
-        patientId,
-        professionalId,
+        observations
       },
     });
 
@@ -131,15 +139,14 @@ const updateAppointment = async (req, res) => {
       appointment: updatedAppointment,
     });
   } catch (error) {
-    if (error.code === 'P2025') {
-      throw new AppError('Agendamento não encontrado', 404);
-    }
+
     throw new AppError('Erro interno do servidor', 500);
   }
 };
 export default {
   create,
   listAll,
-  updateAppointment,
-  listId
+  listId,
+  updateAppointment
+  
 }
