@@ -3,7 +3,7 @@
 CareConnect é uma API RESTful desenvolvida em Node.js com Express e Prisma ORM, criada para gerenciar pacientes, profissionais de saúde, usuários e consultas médicas.
 O sistema garante segurança com JWT e integração com banco de dados relacional.
 
-🌐 Visão Geral
+## 🌐 Visão Geral
 
 A aplicação fornece endpoints para:
 
@@ -17,8 +17,9 @@ Agendamento de consultas
 
 Controle de autenticação via JWT
 
-🚀 Funcionalidades
-👤 Usuários
+## 🚀 Funcionalidades
+
+### 👤 Usuários
 
 Registro de novos usuários
 
@@ -26,7 +27,7 @@ Login com autenticação JWT
 
 Proteção de rotas privadas
 
-🧑‍⚕️ Profissionais
+### 🧑‍⚕️ Profissionais
 
 Cadastro de profissionais de saúde
 
@@ -38,7 +39,7 @@ Atualização de dados
 
 Exclusão de profissionais
 
-😊 Pacientes
+### 😊 Pacientes
 
 Cadastro de pacientes
 
@@ -50,7 +51,7 @@ Atualização de dados
 
 Exclusão de pacientes
 
-🗓️ Consultas
+### 🗓️ Consultas
 
 Criação de consulta vinculada a paciente e profissional
 
@@ -62,33 +63,33 @@ Atualização de agendamento (data, status, paciente, profissional)
 
 Exclusão de consulta
 
-🔗 API – Endpoints Principais
+## 🔗 API – Endpoints Principais
 Usuários
 POST   /users/register     # Criar usuário
 POST   /users/login        # Login
 
-Profissionais
+## Profissionais
 POST   /professionals/create
 GET    /professionals/listAll
 GET    /professionals/listId/:id
 PUT    /professionals/update/:id
 DELETE /professionals/delete/:id
 
-Pacientes
+## Pacientes
 POST   /patients/create
 GET    /patients/listAll
 GET    /patients/listId/:id
 PUT    /patients/update/:id
 DELETE /patients/delete/:id
 
-Consultas
+## Consultas
 POST   /appointments/create
 GET    /appointments/listAll
 GET    /appointments/listId/:id
 PUT    /appointments/update/:id
 DELETE /appointments/delete/:id
 
-🛡️ Autenticação
+### 🛡️ Autenticação
 
 Após o login, o usuário recebe um token JWT.
 
@@ -96,7 +97,7 @@ Enviar o token no header Authorization para acessar rotas privadas.
 
 Authorization: Bearer <seu_token>
 
-🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 Node.js – ambiente de execução
 
@@ -112,7 +113,7 @@ dotenv – gerenciamento de variáveis de ambiente
 
 Bcrypt – criptografia de senhas
 
-📂 Estrutura de Pastas (resumida)
+### 📂 Estrutura de Pastas (resumida)
 src/
 ├── controllers/   # Lógica das rotas
 ├── routes/        # Definição de endpoints
@@ -120,7 +121,7 @@ src/
 ├── utils/         # Funções auxiliares
 └── prisma/        # Schema do banco
 
-▶️ Como executar o projeto localmente
+### ▶️ Como executar o projeto localmente
 # Clone o repositório
 git clone https://github.com/alaenepereira/careconnect-system
 cd careconnect-system
@@ -152,4 +153,5 @@ Desenvolvido durante o Bootcamp de Desenvolvimento Fullstack – Capacita Brasil
 - Julianny Albuquerque
 
 ✨ Projeto backend para gestão de clínica médica com foco em organização, segurança e escalabilidade.
+
 
