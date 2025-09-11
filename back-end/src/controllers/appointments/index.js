@@ -148,7 +148,7 @@ const deleteAppointment = async (req, res) => {
 
   try {
     const appointment = await prisma.appointment.findUnique({
-      where: { id: Number(id) }
+      where: { id }
     })
 
     if (!appointment) {
@@ -156,16 +156,11 @@ const deleteAppointment = async (req, res) => {
     }
 
     await prisma.appointment.delete({
-      where: { id: Number(id) }
+      where: { id }
     })
 
     return res.status(200).json({ message: 'Agendamento deletado com sucesso' })
   } catch (error) {
-    console.error(error)
-
-    if (error?.code === 'P2025') {
-      throw new AppError('Agendamento não encontrado', 404)
-    }
 
     throw new AppError('Erro ao deletar o agendamento', 500)
   }
