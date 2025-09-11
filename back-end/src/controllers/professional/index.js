@@ -82,7 +82,7 @@ const Delete = async(req,res) =>{
       where: { id }
     })
 
-    return res.status(200).json({message: 'Profissional deletado com sucesso', deleteProfessional})
+    return res.status(200).json({message: 'Profissional deletado com sucesso'})
   } catch (error) {
     throw new AppError(error.message, 500)
   }
