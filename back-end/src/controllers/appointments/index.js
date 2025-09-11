@@ -143,10 +143,38 @@ const updateAppointment = async (req, res) => {
     throw new AppError('Erro interno do servidor', 500);
   }
 };
+const deleteAppointment = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const appointment = await prisma.appointment.findUnique({
+      where: { id: Number(id) }
+    })
+
+    if (!appointment) {
+      throw new AppError('Agendamento não encontrado', 404)
+    }
+
+    await prisma.appointment.delete({
+      where: { id: Number(id) }
+    })
+
+    return res.status(200).json({ message: 'Agendamento deletado com sucesso' })
+  } catch (error) {
+    console.error(error)
+
+    if (error?.code === 'P2025') {
+      throw new AppError('Agendamento não encontrado', 404)
+    }
+
+    throw new AppError('Erro ao deletar o agendamento', 500)
+  }
+}
+
 export default {
   create,
   listAll,
   listId,
-  updateAppointment
-  
+  updateAppointment,
+  deleteAppointment
 }

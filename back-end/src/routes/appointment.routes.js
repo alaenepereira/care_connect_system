@@ -8,6 +8,7 @@ scheduleRouter.post('/create', consultation.create)
 scheduleRouter.get('/listAll', consultation.listAll)
 scheduleRouter.get('/listId/:id', consultation.listId)
 scheduleRouter.put('/update/:id', ensureAuthenticated, consultation.updateAppointment)
+scheduleRouter.delete('/delete/:id', ensureAuthenticated, consultation.deleteAppointment)
 
 
 
