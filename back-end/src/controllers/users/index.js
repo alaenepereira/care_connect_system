@@ -10,10 +10,10 @@ const prisma = new PrismaClient();
 const register = async (req, res) => {
 
   try {
-    const { name, email, password, cpf } = req.body
+    const { name, email, password, CPF} = req.body
 
 
-    if (!name || !email || !password || !cpf) {
+    if (!name || !email || !password || !CPF) {
       return res.status(400).json({ message: 'Todos os campos são obrigatórios' });
     }
 
@@ -24,14 +24,15 @@ const register = async (req, res) => {
    const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-      validateCPF(cpf)
+      validateCPF(CPF)
 
  const createUser = await prisma.user.create({
       data: {
         name,
         email,
-        password: hash,
-        cpf
+        cpf: CPF,
+        password: hash
+        
       }
       
     })

@@ -106,10 +106,9 @@ const updatePatient = async (req, res) => {
 }
 
 const deletePatient = async (req, res) => {
+  const { id } = req.params
   try {
-    const { id } = req.params
 
-    
     const existingPatient = await prisma.patient.findUnique({
       where: { id }
     })
@@ -127,9 +126,7 @@ const deletePatient = async (req, res) => {
     })
 
   } catch (error) {
-    if (error instanceof AppError) {
-      throw error
-    }
+    
     throw new AppError('Erro interno do servidor', 500)
   }
 }
